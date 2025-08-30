@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Animation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .counter {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Lead Results You Can Measure</h2>
+
+    <div class="counter" data-target="900000">+</div>
+    <div class="counter" data-target="99">%</div>
+
+    <script>
+        function animateCounter(counter) {
+            let target = +counter.getAttribute("data-target");
+            let count = 0;
+            let step = target / 200; // smaller = slower animation
+
+            function updateCounter() {
+                count += step;
+                if (count < target) {
+                    counter.innerText = Math.floor(count);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.innerText = target; // final value
+                }
+            }
+            updateCounter();
+        }
+
+        // Run on page load
+        document.querySelectorAll(".counter").forEach(animateCounter);
+    </script>
+
+</body>
+
+</html>
